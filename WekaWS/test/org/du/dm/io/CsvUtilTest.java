@@ -8,7 +8,7 @@ import junit.framework.Assert;
 import org.junit.Test;
 
 
-public class IOUtilsTest {
+public class CsvUtilTest {
 	
 	
 	@Test
