@@ -1,18 +1,15 @@
-package mypackage;
-
-import javax.websocket.server.PathParam;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
+package org.du.dm.web;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import javax.websocket.server.PathParam;
+
+import com.google.common.net.MediaType;
+
 //Sets the path to base URL + /hello
-@Path("/modelChar")
+@Path("/models")
 
 public class modelReqResponse {
 
@@ -21,7 +18,7 @@ public class modelReqResponse {
 	 * @throws IOException 
 	 */
 	 @GET
-	 @Path("/{m}")
+	 @Path("{m}")
 
 	  @Produces(MediaType.APPLICATION_JSON)
 	  public String modelCharacterstics(@PathParam("m") String m
@@ -33,6 +30,7 @@ public class modelReqResponse {
 		{
 			String scan;
 			String result= "";
+			//[TODO remove hard coded file name and use CsvUtil add validation]
 	        FileReader file = new FileReader("C:\\Users\\neha\\workspace\\MyWebService\\src\\mypackage\\scan.txt");
 	        BufferedReader br = new BufferedReader(file);
 
