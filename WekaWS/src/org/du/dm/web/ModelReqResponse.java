@@ -11,7 +11,7 @@ import com.google.common.net.MediaType;
 //Sets the path to base URL + /hello
 @Path("/models")
 
-public class modelReqResponse {
+public class ModelReqResponse {
 
 	/**
 	 * @param args
