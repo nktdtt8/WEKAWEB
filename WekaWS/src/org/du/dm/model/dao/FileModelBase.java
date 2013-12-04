@@ -3,11 +3,19 @@ package org.du.dm.model.dao;
 import java.io.BufferedReader;
 import java.io.InputStream;
 
+<<<<<<< HEAD
 import org.du.dm.dao.DatabaseDaoInterface;
 import org.du.dm.model.Model;
 import org.du.dm.model.ModelList;
 
 public class FileModelBase implements DatabaseDaoInterface<Model> {
+=======
+import org.du.dm.dao.DatabaseDao;
+import org.du.dm.model.Model;
+import org.du.dm.model.ModelList;
+
+public class FileModelBase implements DatabaseDao<Model> {
+>>>>>>> branch 'master' of https://github.com/nktdtt8/WEKAWEB.git
 
 	private ModelList models;
 	private BufferedReader reader;
