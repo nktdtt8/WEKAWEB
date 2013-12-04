@@ -26,7 +26,7 @@ public class CsvUtil {
 	public boolean hasNext() throws IOException {
 		if(buffer == null)
 			reader.close();
-		return buffer == null;
+		return buffer != null;
 	}
 
 

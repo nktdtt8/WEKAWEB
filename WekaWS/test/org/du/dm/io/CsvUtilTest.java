@@ -17,9 +17,10 @@ public class CsvUtilTest {
 		CsvUtil h = new CsvUtil(new BufferedReader(a), "\\|");
 		
 		
-		Assert.assertFalse(h.hasNext());
+		Assert.assertTrue(h.hasNext());
 		Assert.assertEquals(5, h.next().length);
 		Assert.assertNull(h.next());
+		Assert.assertFalse(h.hasNext());
 		
 	}
 
