@@ -3,11 +3,11 @@ package org.du.dm.model.dao;
 import java.io.BufferedReader;
 import java.io.InputStream;
 
-import org.du.dm.dao.DatabaseDao;
+import org.du.dm.dao.DatabaseDaoInterface;
 import org.du.dm.model.Model;
 import org.du.dm.model.ModelList;
 
-public class FileModelBase implements DatabaseDao<Model> {
+public class FileModelBase implements DatabaseDaoInterface<Model> {
 
 	private ModelList models;
 	private BufferedReader reader;
