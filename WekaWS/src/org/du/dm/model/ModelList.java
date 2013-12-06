@@ -19,8 +19,5 @@ public class ModelList {
 		// TODO Auto-generated method stub
 		
 	}
-
-	
-	
 	//[TODO implement getter and setter for this]
 }

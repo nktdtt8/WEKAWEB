@@ -1,7 +1,6 @@
 package org.du.dm.web;
 
 import java.io.IOException;
-
 import javax.websocket.server.PathParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -11,18 +10,15 @@ import javax.ws.rs.core.MediaType;
 import org.du.dm.model.Model;
 import org.du.dm.model.dao.FileModelBase;
 
-
-
 /**
  * REST service to get all services or a particular model information
  * the Path described is relative to the base URI
- * @author aniket
+ * @author 
  *
  */
 
 @Path("models")
 public class ModelResource {
-
 	/**
 	 * add query parameter model-name
 	 * @param args
@@ -50,7 +46,6 @@ public class ModelResource {
 		//[TODO implement method] 
 		 
 		return allmodel;
-
 	 }
 	}
 
