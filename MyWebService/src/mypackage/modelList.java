@@ -1,11 +1,11 @@
 package mypackage;
 
+import java.util.ArrayList;
+import java.util.List; 
+
 import javax.xml.bind.JAXBException;
 
 import org.xml.sax.SAXException;
-
-import com.sun.xml.internal.bind.v2.runtime.reflect.ListIterator;
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class modelList {
 
@@ -14,26 +14,30 @@ public class modelList {
 	 */	
 	
 	
-	public List modellist;
-	public  void print() throws SAXException, JAXBException
+	public List<model> modellist;
+	
+	public modelList() {
+		modellist = new ArrayList<model>();
+	}
+	public  String print() throws SAXException, JAXBException
 	{
-		ListIterator<model> iterator=  (ListIterator<model>) modellist;
-		while(iterator.hasNext())
-		{
-			model m = (model) iterator.next();
-			m.print();
+		String models = "";
+		for(model m : modellist)
+		{	models = models + m.print();
+			models = models + "\n";
 		}
+		return models;
 	}
 	
 	public model get(model i) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
-	public void add(model m) {
+	/*public void add(model m) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 
 	public void remove(model m1) {
 		// TODO Auto-generated method stub

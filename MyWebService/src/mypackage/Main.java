@@ -1,10 +1,7 @@
 package mypackage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBException;
-
 import org.xml.sax.SAXException;
 
 public class Main {
@@ -19,12 +16,8 @@ public class Main {
 	public static void main(String[] args) throws NumberFormatException, IOException, SAXException, JAXBException {
 		// TODO Auto-generated method stub
 			CSVFileModel a = new CSVFileModel("scan.txt");
-			modelList resultList = a.convert();
-			resultList.print();
-			
-		
-		
-		
+			modelList resultList;
+			resultList = a.convert();
+			resultList.print();		
 	}
-
 }

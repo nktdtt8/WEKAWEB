@@ -18,8 +18,9 @@ private BufferedReader br;
 	public modelList convert() throws NumberFormatException, IOException {
 		// TODO Auto-generated method stub
 		//[TODO] create Models and return here
+		
 	    String scan;
-	    modelList list=new modelList();
+	    modelList list = new modelList();
 	   		while((scan = br.readLine()) != null)
 		         {
 		           
@@ -35,15 +36,50 @@ private BufferedReader br;
 					m1.dataSet = parts[1];
 					System.out.println(parts[2]);
 					m1.accuracy= Float.parseFloat(parts[2]);
-					//((modelList) list.modellist).add(m1);
-			        
+					list.modellist.add(m1);
+					
 		          }
-		      	        
-		        br.close();
-
-		
+		        br.close();		
 		return list;
 	}
 	
-
+	public model compare(String modelName) throws NumberFormatException, IOException {
+		
+		 String scan;
+		 String[] parts = null;
+		 boolean flag = false;
+		 
+		   		while((scan = br.readLine()) != null)
+			         {
+			           
+			        	System.out.println(scan);
+			            parts = scan.split(";");
+			           
+			            if(parts[0].equals(modelName))
+			            {
+			            	flag = true;
+			            	break;	
+			            }
+			          }
+		   		br.close();		
+				
+		   		if(flag== true)
+		   		{
+		   			model m1 = new model();
+	            
+            		System.out.println(parts[0]);
+					m1.algorithmName = parts[0];
+					System.out.println(m1.algorithmName);
+				
+					System.out.println(parts[1]);
+					m1.dataSet = parts[1];
+					System.out.println(parts[2]);
+					m1.accuracy= Float.parseFloat(parts[2]);
+					return m1;
+		   		}
+		   		else
+		   		{
+		   			return null;
+		   		}			
+	}
 }
