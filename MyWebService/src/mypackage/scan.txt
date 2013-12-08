@@ -1,2 +1,0 @@
-J48;weather.nominal.arff;50.9
-abc;cpu.arff;47.7
