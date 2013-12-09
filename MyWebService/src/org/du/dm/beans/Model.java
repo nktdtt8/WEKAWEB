@@ -8,8 +8,8 @@ public class Model {
 	 */
 	protected String id;
 	protected String algorithmName;
-	protected String desc;
 	protected float accuracy;
+	protected String desc;
 	
 	public Model(String id) {
 		this.id = id;
