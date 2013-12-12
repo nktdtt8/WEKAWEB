@@ -21,11 +21,11 @@ import com.sun.jersey.multipart.FormDataParam;
  * Used for uploading data via REST
  */
 
-@Path("/weka")
+@Path("upload")
 public class UploadDataResource {
 
 	private final String BASE_DIR = "D:/tmp";
-	@Path("/fileupload")
+	@Path("file")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response uploadFile(@FormDataParam("file") InputStream is) throws IOException {

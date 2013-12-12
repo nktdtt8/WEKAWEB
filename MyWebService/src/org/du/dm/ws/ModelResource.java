@@ -20,7 +20,7 @@ import org.du.dm.io.FileModelInterface;
 
 public class ModelResource {
 
-	/**
+	/** run karo
 	 * @param args
 	 * @throws FileNotFoundException 
 	 * @throws IOException 
@@ -33,7 +33,7 @@ public class ModelResource {
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getAllModels() throws FileNotFoundException {
 
-		FileModelInterface csvFileModelobj= new CSVFileModel("C:/Users/neha/workspace/MyWebService/src/scan.txt");
+		FileModelInterface csvFileModelobj= new CSVFileModel("C:/Users/neha/workspace/MyWebService/scan.txt");
 		
 		ModelList resultList = csvFileModelobj.convert();
 		return resultList.toString();
@@ -48,7 +48,7 @@ public class ModelResource {
 	public String matchingModel(@PathParam("q") String modelId
 			) throws FileNotFoundException {
 
-		FileModelInterface csvFileModelobj= new CSVFileModel("C:/Users/neha/workspace/MyWebService/src/scan.txt");
+		FileModelInterface csvFileModelobj= new CSVFileModel("C:/Users/neha/workspace/MyWebService/scan.txt");
 		ModelList lst = csvFileModelobj.convert();
 		Model q = new Model(modelId);
 		return lst.get(q).toString();
