@@ -18,6 +18,11 @@ import org.du.dm.weka.classify.ExecuteClassifier;
 import weka.classifiers.Classifier;
 import weka.core.Instances;
 
+/**
+ * 
+ * @author neha
+ *
+ */
 @Path("weka1")
 public class WekaResource {
 	

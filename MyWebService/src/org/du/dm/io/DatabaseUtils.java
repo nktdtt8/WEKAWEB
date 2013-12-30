@@ -1,7 +1,6 @@
 package org.du.dm.io;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.FileUtils;
 import org.du.dm.beans.Data;
 import org.du.dm.beans.Model;
 import org.du.dm.beans.ModelList;
@@ -18,6 +17,7 @@ import org.du.dm.constants.WekaWSConstants;
 /**
  * 
  * Create new Database instance
+ * All database activities are done here
  * @author neha
  *
  */
@@ -150,8 +150,8 @@ public class DatabaseUtils {
 		if(newFile.exists())
 			return false;
 		try {
-			newFile.createNewFile();
-			IOUtils.write(data, new FileWriter(newFile));
+			System.out.println(data);
+			FileUtils.write(newFile, data);
 		} catch (IOException e) {
 			return false;	//incase of any IO error
 		}
