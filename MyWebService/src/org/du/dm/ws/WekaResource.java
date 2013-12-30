@@ -39,7 +39,7 @@ public class WekaResource {
 			boolean _success = DatabaseUtils.writeToFile(outputfile, test.toString());
 			
 			if(_success) 
-				return Response.status(Status.ACCEPTED).entity(outputfile).build();
+				return Response.status(Status.OK).entity(outputfile).build();
 			 else
 				return Response.status(Status.BAD_REQUEST).build();
 		

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import org.apache.commons.io.IOUtils;
 import org.du.dm.beans.Data;
 import org.du.dm.beans.Model;
+import org.du.dm.beans.ModelList;
 import org.du.dm.constants.WekaWSConstants;
 
 /**
@@ -45,7 +46,7 @@ public class DatabaseUtils {
 	/**
 	 * 
 	 * @param id		the model id
-	 * @return			if model exists then medel bean null otherwise
+	 * @return			if model exists then model bean null otherwise
 	 * @throws SQLException
 	 */
 	public static Model readModel(String id) throws SQLException {
@@ -68,7 +69,26 @@ public class DatabaseUtils {
 		else
 			return m;
 	}
-
+	
+	public static ModelList readAllModel() throws SQLException {
+		PreparedStatement stm = conn.prepareStatement("select * from "+WekaWSConstants._MODEL_TABLE);
+		ResultSet result = stm.executeQuery();
+		ModelList list = new ModelList();
+		while(result.next()) {
+			Model m = new Model();
+			m.setAccuracy(result.getFloat("accuracy"));
+			m.setAlgoName(result.getString("algoName"));
+			m.setDescription(result.getString("desc"));
+			m.setLocation(result.getString("location"));
+			m.setPrecision(result.getFloat("precision"));
+			m.setRecall(result.getFloat("recall"));
+			m.setId(result.getString("id"));
+			m.setUserid(result.getLong("userid"));
+			list.add(m);
+		}
+		
+		return list;
+	}
 	/**
 	 * 
 	 * @param dataId		the id in the datatable

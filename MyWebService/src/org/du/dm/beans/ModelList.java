@@ -39,4 +39,8 @@ public class ModelList {
 		
 		return out;
 	}
+
+	public Model[] asArray() {
+		return modelList.toArray(new Model[0]);
+	}
 }

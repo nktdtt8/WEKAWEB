@@ -29,11 +29,16 @@ public class DataResource {
 	@Path("upload")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public Response uploadFile(@FormDataParam("file") InputStream is) throws IOException {
+	public Response uploadFile(@FormDataParam("file") InputStream is) {
 
 		String output = UUID.randomUUID().toString();
-		OutputStream os = new FileOutputStream(BASE_DIR + "/" + output);
-		IOUtils.copyLarge(is,os);
-		return Response.status(Status.ACCEPTED).entity(output).build();
+		
+		try {
+			OutputStream os = new FileOutputStream(BASE_DIR + "/" + output);
+			IOUtils.copyLarge(is,os);
+		} catch (IOException e) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		return Response.status(Status.OK).entity(output).build();
 	}
 }

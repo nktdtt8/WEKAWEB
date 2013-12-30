@@ -1,17 +1,18 @@
 package org.du.dm.ws;
 
-import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
-import javax.ws.rs.PathParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.du.dm.beans.Model;
 import org.du.dm.beans.ModelList;
-import org.du.dm.io.CSVFileModel;
-import org.du.dm.io.FileModelInterface;
+import org.du.dm.io.DatabaseUtils;
 
 
 @Path("weka/trained")
@@ -22,11 +23,16 @@ public class ModelResource {
 	@GET
 	@Path("models")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String getAllModels() throws FileNotFoundException {
+	public Response getAllModels() {
 
-		FileModelInterface csvFileModelobj= new CSVFileModel("/home/aniket/Documents/WEKAWEB/MyWebService/scan.txt");
-		ModelList resultList = csvFileModelobj.convert();
-		return resultList.toString();
+		ModelList list;
+		try {
+			list = DatabaseUtils.readAllModel();
+			return Response.status(Status.OK).entity(list.toString()).build();
+		} catch (SQLException e) {
+			return Response.status(Status.NOT_FOUND).build();
+		}
+		
 
 	}
 
@@ -34,13 +40,19 @@ public class ModelResource {
 	@GET
 	@Path("models/{q}")
 	@Produces(MediaType.TEXT_PLAIN)
-	public String matchingModel(@PathParam("q") String modelId
-			) throws FileNotFoundException {
+	public Response matchingModel(@PathParam("q") String modelId
+			) {
 
-		FileModelInterface csvFileModelobj= new CSVFileModel("/home/aniket/Documents/WEKAWEB/MyWebService/scan.txt");
-		ModelList lst = csvFileModelobj.convert();
-		Model q = new Model(modelId);
-		return lst.get(q).toString();
+		Model m;
+		try {
+			m = DatabaseUtils.readModel(modelId);
+		} catch (SQLException e) {
+			return Response.status(Status.BAD_REQUEST).build();
+		}
+		if( m==null )
+			return Response.status(Status.NOT_FOUND).build();
+		else
+			return Response.status(Status.OK).entity(m.toString()).build();
 	}
 }
 
