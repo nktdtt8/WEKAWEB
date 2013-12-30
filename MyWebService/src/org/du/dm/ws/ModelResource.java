@@ -22,16 +22,16 @@ public class ModelResource {
 	
 	@GET
 	@Path("models")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllModels() {
 
 		ModelList list;
 		try {
 			list = DatabaseUtils.readAllModel();
-			return Response.status(Status.OK).entity(list.toString()).build();
+			return Response.status(Status.OK).entity(list).build();
 		} catch (SQLException e) {
 			return Response.status(Status.NOT_FOUND).build();
-		}
+		} 
 		
 
 	}
@@ -39,7 +39,7 @@ public class ModelResource {
 
 	@GET
 	@Path("models/{q}")
-	@Produces(MediaType.TEXT_PLAIN)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response matchingModel(@PathParam("q") String modelId
 			) {
 
@@ -52,7 +52,7 @@ public class ModelResource {
 		if( m==null )
 			return Response.status(Status.NOT_FOUND).build();
 		else
-			return Response.status(Status.OK).entity(m.toString()).build();
+			return Response.status(Status.OK).entity(m).build();
 	}
 }
 
