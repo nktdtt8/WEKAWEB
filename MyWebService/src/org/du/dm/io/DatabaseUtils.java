@@ -70,6 +70,11 @@ public class DatabaseUtils {
 			return m;
 	}
 	
+	/**
+	 * 
+	 * @return				the whole list of models present
+	 * @throws SQLException
+	 */
 	public static ModelList readAllModel() throws SQLException {
 		PreparedStatement stm = conn.prepareStatement("select * from "+WekaWSConstants._MODEL_TABLE);
 		ResultSet result = stm.executeQuery();
