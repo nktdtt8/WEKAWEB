@@ -14,27 +14,17 @@ import org.du.dm.io.CSVFileModel;
 import org.du.dm.io.FileModelInterface;
 
 
-@Path("weka")
-
-//Sets the path to base URL + /hello
+@Path("weka/trained")
 
 public class ModelResource {
 
-	/** run karo
-	 * @param args
-	 * @throws FileNotFoundException 
-	 * @throws IOException 
-	 * @throws JAXBException 
-	 * @throws SAXException 
-	 */
-
+	
 	@GET
 	@Path("models")
 	@Produces(MediaType.TEXT_PLAIN)
 	public String getAllModels() throws FileNotFoundException {
 
-		FileModelInterface csvFileModelobj= new CSVFileModel("C:/Users/neha/workspace/MyWebService/scan.txt");
-		
+		FileModelInterface csvFileModelobj= new CSVFileModel("/home/aniket/Documents/WEKAWEB/MyWebService/scan.txt");
 		ModelList resultList = csvFileModelobj.convert();
 		return resultList.toString();
 
@@ -43,12 +33,11 @@ public class ModelResource {
 
 	@GET
 	@Path("models/{q}")
-
 	@Produces(MediaType.TEXT_PLAIN)
 	public String matchingModel(@PathParam("q") String modelId
 			) throws FileNotFoundException {
 
-		FileModelInterface csvFileModelobj= new CSVFileModel("C:/Users/neha/workspace/MyWebService/scan.txt");
+		FileModelInterface csvFileModelobj= new CSVFileModel("/home/aniket/Documents/WEKAWEB/MyWebService/scan.txt");
 		ModelList lst = csvFileModelobj.convert();
 		Model q = new Model(modelId);
 		return lst.get(q).toString();

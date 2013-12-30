@@ -6,10 +6,23 @@ public class Model {
 	/**
 	 * @param args
 	 */
-	protected String id;
-	protected String algorithmName;
-	protected float accuracy;
-	protected String desc;
+	private String id;
+	private String algorithmName;
+	private float accuracy;
+	private float precision;
+	private float recall;
+	private long userid;
+	private String location;
+	private String desc;
+	
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	
+	public Model() { }
 	
 	public Model(String id) {
 		this.id = id;
@@ -58,5 +71,29 @@ public class Model {
 	@Override
 	public int hashCode() {
 		return id.hashCode();
+	}
+	public float getPrecision() {
+		return precision;
+	}
+	public void setPrecision(float precision) {
+		this.precision = precision;
+	}
+	public float getRecall() {
+		return recall;
+	}
+	public void setRecall(float recall) {
+		this.recall = recall;
+	}
+	public long getUserid() {
+		return userid;
+	}
+	public void setUserid(long userid) {
+		this.userid = userid;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
 	}
 }
