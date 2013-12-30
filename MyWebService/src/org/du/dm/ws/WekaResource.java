@@ -24,11 +24,11 @@ public class WekaResource {
 	@GET
 	@Path("classify")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response wekaOutput(@QueryParam("dataId") String dataId, @QueryParam("algoName") String algoName) throws Exception
+	public Response wekaOutput(@QueryParam("dataId") String dataId, @QueryParam("algoId") String algoId) throws Exception
 	{
 		   
 		  Instances test = WekaUtils.convertDataIdToInstances(dataId); 
-		  Classifier  cls = WekaUtils.convertModelIdToObject(algoName);
+		  Classifier  cls = WekaUtils.convertModelIdToObject(algoId);
 		  
 		  //load classifier from database
 		  test = new ExecuteClassifier().classify(cls, test);
@@ -38,7 +38,7 @@ public class WekaResource {
 			JSONObject obj = new JSONObject();
 			obj.put("name", outputfile);
 			obj.put("dataId", dataId);
-			obj.put("algoName", algoName);
+			obj.put("algoId", algoId);
 			
 		//write instances to outputfile
 			boolean _success = DatabaseUtils.writeToFile(outputfile, test.toString());
