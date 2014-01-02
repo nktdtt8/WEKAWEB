@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.codehaus.jettison.json.JSONObject;
+import org.du.dm.constants.WekaWSConstants;
 import org.du.dm.io.DatabaseUtils;
 import org.du.dm.io.WekaUtils;
 import org.du.dm.weka.classify.ExecuteClassifier;
@@ -31,7 +32,8 @@ public class WekaResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response wekaOutput(@QueryParam("dataId") String dataId, @QueryParam("algoId") String algoId) throws Exception
 	{
-		   
+		  WekaWSConstants.LOG.info("dataId:  ["+dataId+"]");
+		  WekaWSConstants.LOG.info("AlgoId:  ["+algoId+"]");
 		  Instances test = WekaUtils.convertDataIdToInstances(dataId); 
 		  Classifier  cls = WekaUtils.convertModelIdToObject(algoId);
 		  
@@ -45,6 +47,7 @@ public class WekaResource {
 			obj.put("dataId", dataId);
 			obj.put("algoId", algoId);
 			
+			WekaWSConstants.LOG.info("return data : " + obj.toString());
 		//write instances to outputfile
 			boolean _success = DatabaseUtils.writeToFile(outputfile, test.toString());
 			

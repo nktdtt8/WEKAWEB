@@ -35,13 +35,14 @@ public class DataResource {
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response uploadFile(@FormDataParam("file") InputStream is) {
-
 		String output = UUID.randomUUID().toString();
-		
+		WekaWSConstants.LOG.info("generated output filename: ["+output+"]");
 		try {
+			WekaWSConstants.LOG.info("file size: [" + is.available() + "] bytes");
 			OutputStream os = new FileOutputStream(WekaWSConstants._TMP_BASE_DIR + output);
 			IOUtils.copyLarge(is,os);
 		} catch (IOException e) {
+			WekaWSConstants.LOG.info(e.toString());
 			return Response.status(Status.BAD_REQUEST).build();
 		}
 		return Response.status(Status.OK).entity(output).build();
