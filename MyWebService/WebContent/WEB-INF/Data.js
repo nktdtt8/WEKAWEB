@@ -37,7 +37,7 @@ function myfunc() {
 				
 		// redirect to main page if successfully done
 		
-		window.location.href = "main.html";
+		window.location.href = "Home.htm";
 	}
 	
 	
