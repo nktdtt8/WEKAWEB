@@ -5,35 +5,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<script>
-	function myfunc() {
-			
-		var form = document.getElementById('form1');
-		
-		//add validation
-		var type = document.getElementsByName('type')[0].value;
-		
-		if(type != "0" && type != "1") {
-			alert("possible values for type is 0 [arff] or 1 [csv]");
-			return;
-		} 
-					
-		var islabel = document.getElementsByName('isLabeled')[0].value
-			
-		if(islabel.toUpperCase() != "FALSE" && islabel.toUpperCase() != "TRUE") {
-			alert("possible values for islabel is FALSE or TRUE");
-			return;
-		}
-		
-		form.submit();		
-		
-	}
-	
-	
-</script> 
+<script src="Data.js">	</script>
+ 
 	<h1>WekaWS Data upload</h1>
  
-	<form action="http://localhost:8080/MyWebService/rest/data/upload" method="post" enctype="multipart/form-data" id="form1">
+	<form enctype="multipart/form-data" id="dataForm">
 
 		<p>
 			Select a file : <input type="file" name="file" size="45" /> <br>
