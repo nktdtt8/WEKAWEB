@@ -34,6 +34,7 @@ public class WekaResource {
 	{
 		  WekaWSConstants.LOG.info("dataId:  ["+dataId+"]");
 		  WekaWSConstants.LOG.info("AlgoId:  ["+algoId+"]");
+		  
 		  Instances test = WekaUtils.convertDataIdToInstances(dataId); 
 		  Classifier  cls = WekaUtils.convertModelIdToObject(algoId);
 		  

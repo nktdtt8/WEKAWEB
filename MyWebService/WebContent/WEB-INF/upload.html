@@ -6,12 +6,16 @@
 </head>
 <body>
 <body>
-	<h1>File Upload with Jersey</h1>
+	<h1>WekaWS Data upload</h1>
  
 	<form action="http://localhost:8080/MyWebService/rest/data/upload" method="post" enctype="multipart/form-data">
  
 	   <p>
-		Select a file : <input type="file" name="file" size="45" />
+		Select a file : <input type="file" name="file" size="45" /> <br>
+		File name: <input type="text" name="name" size="20" />  <br>
+		Description : <input type="text" name="desc" size="50" /> <br>
+		File Type: <input type="text" name="type" size="3" /> <br>
+		labeled  : <input type="text" name="isLabeled" 	size=10 /> 	
 	   </p>
  
 	   <input type="submit" value="Upload It" />

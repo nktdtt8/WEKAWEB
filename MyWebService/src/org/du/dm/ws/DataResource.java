@@ -40,7 +40,7 @@ public class DataResource {
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response uploadFile(@FormDataParam("file") InputStream is) {
+	public Response uploadFile(@FormDataParam("file") InputStream is, @FormDataParam("type") byte wekaFileType, @FormDataParam("isLabeled") boolean islabeled, @FormDataParam("desc") String desc, @FormDataParam("name") String filename) {
 		String output = UUID.randomUUID().toString();
 		WekaWSConstants.LOG.severe("generated output filename: ["+output+"]");
 		try {
@@ -54,11 +54,11 @@ public class DataResource {
 		//insert to database
 		
 		Data d = new Data();
-		d.setFileName(output);
+		d.setFileName(filename);
 		d.setId(output);
-		d.setDesc("test data file");
-		d.setLabeled(false);
-		d.setType((byte)0);
+		d.setDesc(desc);
+		d.setLabeled(islabeled);
+		d.setType(wekaFileType);
 		d.setLocation(WekaWSConstants._TMP_BASE_DIR + output);
 		
 		try {
