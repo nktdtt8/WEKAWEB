@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
@@ -19,7 +20,11 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.apache.commons.io.IOUtils;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
+import org.du.dm.beans.Data;
 import org.du.dm.constants.WekaWSConstants;
+import org.du.dm.io.DatabaseUtils;
 
 import com.sun.jersey.multipart.FormDataParam;
 
@@ -34,18 +39,49 @@ public class DataResource {
 	@Path("upload")
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response uploadFile(@FormDataParam("file") InputStream is) {
 		String output = UUID.randomUUID().toString();
-		WekaWSConstants.LOG.info("generated output filename: ["+output+"]");
+		WekaWSConstants.LOG.severe("generated output filename: ["+output+"]");
 		try {
-			WekaWSConstants.LOG.info("file size: [" + is.available() + "] bytes");
 			OutputStream os = new FileOutputStream(WekaWSConstants._TMP_BASE_DIR + output);
 			IOUtils.copyLarge(is,os);
 		} catch (IOException e) {
 			WekaWSConstants.LOG.info(e.toString());
 			return Response.status(Status.BAD_REQUEST).build();
 		}
-		return Response.status(Status.OK).entity(output).build();
+		
+		//insert to database
+		
+		Data d = new Data();
+		d.setFileName(output);
+		d.setId(output);
+		d.setDesc("test data file");
+		d.setLabeled(false);
+		d.setType((byte)0);
+		d.setLocation(WekaWSConstants._TMP_BASE_DIR + output);
+		
+		try {
+			DatabaseUtils.persistData(d);
+			JSONObject obj = new JSONObject();
+			obj.put("id", output);
+			return Response.status(Status.OK).entity(obj).build();
+		} catch (SQLException e) {
+			//delete the file if exists incase we are here !!!
+			File f = new File(WekaWSConstants._TMP_BASE_DIR + output);
+			if(f.exists()) {
+				f.delete();
+				WekaWSConstants.LOG.info("deleted file: ["+f.getName()+"]");
+			}
+			
+			WekaWSConstants.LOG.info(e.toString());
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		} catch (JSONException e) {
+			//we will never be here
+			return null;
+		}
+		
+		
 	}
 	
 	@Path("download/{id}")

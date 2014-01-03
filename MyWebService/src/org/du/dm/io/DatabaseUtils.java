@@ -125,13 +125,13 @@ public class DatabaseUtils {
 	 * @throws SQLException		incase of any type mismatch (order is important)
 	 */
 	public static void persistData(Data d) throws SQLException {
-		PreparedStatement stm = conn.prepareStatement("insert into "+WekaWSConstants._DATA_TABLE+" values(?,?,?,?,?)");
-		stm.setString(1,d.getId());
+		PreparedStatement stm = conn.prepareStatement("insert into "+WekaWSConstants._DATA_TABLE+" values(?,?,?,?,?,?)");
+		stm.setString(3,d.getId());
 		stm.setString(2, d.getFileName());
-		stm.setString(3, d.getDesc());
-		stm.setString(4, d.getLocation());
+		stm.setString(1, d.getDesc());
+		stm.setString(6, d.getLocation());
 		stm.setByte(5, d.getType());
-		stm.setBoolean(6, d.isLabeled());
+		stm.setBoolean(4, d.isLabeled());
 		stm.executeUpdate();
 	}
 	

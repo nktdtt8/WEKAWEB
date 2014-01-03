@@ -24,7 +24,7 @@ import weka.core.Instances;
  * @author neha
  *
  */
-@Path("weka1")
+@Path("weka")
 public class WekaResource {
 	
 	@GET
