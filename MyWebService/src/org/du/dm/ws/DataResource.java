@@ -6,7 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 import javax.ws.rs.Consumes;
@@ -40,7 +43,7 @@ public class DataResource {
 	@POST
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response uploadFile(@FormDataParam("file") InputStream is, @FormDataParam("type") byte wekaFileType, @FormDataParam("isLabeled") boolean islabeled, @FormDataParam("desc") String desc, @FormDataParam("name") String filename) {
+	public Response uploadFile(@FormDataParam("file") InputStream is, @FormDataParam("type") byte wekaFileType, @FormDataParam("isLabeled") boolean islabeled, @FormDataParam("desc") String desc, @FormDataParam("name") String filename , @FormDataParam("uploaddate") String date) {
 		String output = UUID.randomUUID().toString();
 		WekaWSConstants.LOG.severe("generated output filename: ["+output+"]");
 		try {
@@ -52,14 +55,20 @@ public class DataResource {
 		}
 		
 		//insert to database
-		
+		SimpleDateFormat format = new SimpleDateFormat("YYYY/MM/dd");
 		Data d = new Data();
 		d.setFileName(filename);
 		d.setId(output);
 		d.setDesc(desc);
 		d.setLabeled(islabeled);
 		d.setType(wekaFileType);
+		try {
+			d.setUploadDate(new Date(format.parse(date).getTime()));
+		} catch (ParseException e1) {
+			d.setUploadDate(new Date(System.currentTimeMillis()));
+		}
 		d.setLocation(WekaWSConstants._TMP_BASE_DIR + output);
+		
 		
 		try {
 			DatabaseUtils.persistData(d);

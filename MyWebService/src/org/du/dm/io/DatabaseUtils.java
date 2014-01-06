@@ -3,6 +3,7 @@ package org.du.dm.io;
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -125,13 +126,14 @@ public class DatabaseUtils {
 	 * @throws SQLException		incase of any type mismatch (order is important)
 	 */
 	public static void persistData(Data d) throws SQLException {
-		PreparedStatement stm = conn.prepareStatement("insert into "+WekaWSConstants._DATA_TABLE+" values(?,?,?,?,?,?)");
+		PreparedStatement stm = conn.prepareStatement("insert into "+WekaWSConstants._DATA_TABLE+" values(?,?,?,?,?,?,?)");
 		stm.setString(3,d.getId());
 		stm.setString(2, d.getFileName());
 		stm.setString(1, d.getDesc());
 		stm.setString(6, d.getLocation());
 		stm.setByte(5, d.getType());
 		stm.setBoolean(4, d.isLabeled());
+		stm.setDate(7, new Date(System.currentTimeMillis()));
 		stm.executeUpdate();
 	}
 	
@@ -150,7 +152,6 @@ public class DatabaseUtils {
 		if(newFile.exists())
 			return false;
 		try {
-			System.out.println(data);
 			FileUtils.write(newFile, data);
 		} catch (IOException e) {
 			return false;	//incase of any IO error

@@ -1,5 +1,9 @@
 package org.du.dm.beans;
 
+import java.sql.Date;
+
+
+
 public class Data {
 	private String location;
 	private String id;
@@ -7,6 +11,7 @@ public class Data {
 	private boolean labeled;
 	private byte type;
 	private String desc;
+	private Date uploadDate;
 	/**
 	 * @return the location
 	 */
@@ -78,5 +83,11 @@ public class Data {
 	 */
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+	public Date getUploadDate() {
+		return uploadDate;
+	}
+	public void setUploadDate(Date uploadDate) {
+		this.uploadDate = uploadDate;
 	}
 }
