@@ -6,8 +6,6 @@
 function myfunc() 
 {
 			
-		alert('hello');
-		
 		/**
 		*	generate form data
 		*/
@@ -66,7 +64,7 @@ function myfunc()
 				
 		// redirect to main page if successfully done
 		
-		window.location.href = "Home.htm";
+		alert(c.responseText);
 		
 }
 	
